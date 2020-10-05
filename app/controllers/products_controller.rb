@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
 
     def index
         @product = Product.all
-        rebder json: @product
+        render json: @product
     end
 
     def create
@@ -24,5 +24,5 @@ class ProductsController < ApplicationController
             render json: @product.errors, status: :upprocessable_entity
         end
     end
-    
+
 end
