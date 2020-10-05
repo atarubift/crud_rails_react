@@ -36,11 +36,34 @@ class MainContainer extends React.Component {
         })
     }
 
+    deleteProduct = (id) => {
+        axios.delete('http://localhost:3001/products/${id}')
+        .then((response) => {
+            const productIndex = this.state.products.findIndex(x => x.id === id)
+            const deleteProduct = update(this.state.products, {$splice: [[productIndex, 1]]})
+            console.log('set')
+        })
+        .catch((data) =>{
+            console.log(data)
+        })
+    }
+
+    updateProduct = (id, product) => {
+        axios.patch('http://localhost:3001/products/${id}',{product: product})
+        .then((response) => {
+            const productIndex = this.state.products.findIndex(x => x.id === id)
+            const products = update(this.state.products, {[productIndex]: {$set: response.data}})
+        })
+        .catch((data) =>{
+            console.log(data)
+        })
+    }
+
     render() {
         return (
             <div className='app-main'>
-                <FormContainer createProduct={this.createProduct} />
-                <ProductsContainer productData={ this.state.products } />
+                <FormContainer hendleAdd={this.hendleAdd} createProduct={this.createProduct} />
+                <ProductsContainer productData={ this.state.products } deleteProduct={this.deleteProduct}/>
             </div>
         );
     }
