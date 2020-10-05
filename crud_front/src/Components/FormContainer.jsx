@@ -22,4 +22,4 @@ class FormContainer extends React.Component {
     }
 }
 
-export default FormcContainer
+export default FormContainer
