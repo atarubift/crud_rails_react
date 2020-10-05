@@ -2,21 +2,22 @@ import React from 'react'
 import {Button,FormGroup,FormControl} from 'react-bootstrap'
 
 class FormContainer extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            product: ''
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      product: ''
     }
+  }
 
-    onChangetext(e) {
-        this.setState({product: e.target.value})
-    }
+  hundleSubmit = () => {
+    this.props.createProduct(this.state.product)
+    this.setState({product:''})
+  }
 
-    hundleSubmit = () => {
-        this.props.createProduct(this.state.product)
-        this.setState({product:''})
-    }
+  onChangetext(e) {
+    this.setState({product: e.target.value})
+  }
+
 
   render(){
     return(

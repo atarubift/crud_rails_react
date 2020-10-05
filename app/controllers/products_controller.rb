@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
 
     def update
         @product = Product.find(params[:id])
-        @product.update_attribute(product: params[product])
+        @product.update_attributes(product: params[:product])
         render json: @product
     end
 
