@@ -1,0 +1,52 @@
+digraph yard {
+  graph [rankdir=BT rank=sink outputMode=nodesfirst packMode="graph" splines=true];
+  node [shape=record rank=sink rankType=sink];
+  Root [label="{root root||}" rank=sink];
+  Product [label="{class Product||}" rank=sink];
+  subgraph cluster_Product {
+    label = "Product"; labelloc=b;
+  }
+  Product -> ApplicationRecord;
+  ApplicationJob [label="{class ApplicationJob||}" rank=sink];
+  subgraph cluster_ApplicationJob {
+    label = "ApplicationJob"; labelloc=b;
+  }
+  ApplicationJob -> ActiveJob_Base;
+  ApplicationRecord [label="{class ApplicationRecord||}" rank=sink];
+  subgraph cluster_ApplicationRecord {
+    label = "ApplicationRecord"; labelloc=b;
+  }
+  ApplicationRecord -> ActiveRecord_Base;
+  ApplicationMailer [label="{class ApplicationMailer||}" rank=sink];
+  subgraph cluster_ApplicationMailer {
+    label = "ApplicationMailer"; labelloc=b;
+  }
+  ApplicationMailer -> ActionMailer_Base;
+  ProductsController [label="{class ProductsController||+ \#create\l+ \#destroy\l+ \#index\l+ \#update\l}" rank=sink];
+  subgraph cluster_ProductsController {
+    label = "ProductsController"; labelloc=b;
+  }
+  ProductsController -> ApplicationController;
+  ApplicationController [label="{class ApplicationController||}" rank=sink];
+  subgraph cluster_ApplicationController {
+    label = "ApplicationController"; labelloc=b;
+  }
+  ApplicationController -> ActionController_API;
+  subgraph cluster_ {
+    label = ""; labelloc=b;
+    ApplicationCable [label="{module ApplicationCable||}" rank=sink];
+    ApplicationCable_Channel [label="{class Channel||}" rank=sink];
+    subgraph cluster_ApplicationCable_Channel {
+      label = "Channel"; labelloc=b;
+    }
+    ApplicationCable_Channel -> ActionCable_Channel_Base;
+    ApplicationCable_Connection [label="{class Connection||}" rank=sink];
+    subgraph cluster_ApplicationCable_Connection {
+      label = "Connection"; labelloc=b;
+    }
+    ApplicationCable_Connection -> ActionCable_Connection_Base;
+    subgraph cluster_ApplicationCable {
+      label = "ApplicationCable"; labelloc=b;
+    }
+  }
+}
